@@ -44,6 +44,17 @@ struct GraphView: View{
                     .padding()
                 Mychart
                 Spacer()
+                HStack{
+                    Image("peep-42")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150)
+                    
+                    Image("peep-44")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150)
+                }
 
                 
             }
@@ -64,42 +75,46 @@ extension GraphView{
         let myArray = diaries.map { $0.mood_index}
         let average = myArray.reduce(0, +) / Double(myArray.count)
         return HStack{
-            VStack{
-                Text("\(String(format: "%.1f", average))")
-                    .padding(.bottom,3)
-                Text("Average ")
-                    .fontWeight(.bold)
-            }
+
             
+            
+            graph_metric(name: "Average", value: "\(String(format: "%.1f", average))")
             Spacer()
             
-            VStack{
-                Text("\(myArray.count)")
-                    .padding(.bottom,3)
-                Text("records")
-                    .fontWeight(.bold)
-            }
+
+            
+            graph_metric(name: "records", value: "\(myArray.count)")
             Spacer()
             
-            VStack{
-                Text("\(getDiaryTime2(date:selectedDate))")
-                    .padding(.bottom,3)
-                Text("Date")
-                    .fontWeight(.bold)
-            }
+
             
+            graph_metric(name: "Date", value: "\(getDiaryTime2(date:selectedDate))")
             Spacer()
             
-            VStack{
-                Text("\(String(format: "%.1f",selectedMood))")
-                    .padding(.bottom,3)
-                Text("Mood")
-                    .fontWeight(.bold)
-            }
+            graph_metric(name: "Mood", value: "\(String(format: "%.1f",selectedMood))")
             
+
         }
+        .background(
+        RoundedRectangle(cornerRadius: 10)
+            .frame(width: 350)
+        
+        )
+
     }
     
+    private func graph_metric(name:String,value:String)->some View{
+        VStack{
+            Text(name)
+                .fontWeight(.bold)
+            Text(value)
+                .padding(.bottom,3)
+
+        }
+        .foregroundColor(Color(UIColor.systemBackground))
+        .padding([.top,.bottom],10)
+        
+    }
     private var  dateSegmentPicker: some View {
        
         Picker("Select a date range", selection: $selectedFilter) {
@@ -110,6 +125,8 @@ extension GraphView{
             .frame(maxWidth: .infinity)
             .pickerStyle(SegmentedPickerStyle())
             .onChange(of: selectedFilter){_ in getPredicate()}
+//            .background(.black)
+           
         }
     
     
@@ -235,7 +252,6 @@ extension GraphView{
 //                                        } //背景色和边缘
                     .frame(height: 300)
                 }//groupbox
-                
             }
         }//Vstack
         

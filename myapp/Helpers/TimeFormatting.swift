@@ -68,3 +68,33 @@ enum DateFilter: String, CaseIterable {
     case month = "This Month"
     case year = "This Year"
 }
+
+enum MyWeather: String, CaseIterable {
+    case sunny = "sunny"
+    case rain = "rain"
+    case cloud = "cloud"
+    case thunder = "thunder"
+    case snow = "snow"
+    case wind = "wind"
+    
+    var pickWeather: String{
+        
+        switch self{
+                    case .sunny:
+                        return "sun.max"
+                    case .rain:
+                        return  "cloud.rain"
+                    case .cloud:
+                        return  "smoke"
+                    case .thunder:
+                        return "cloud.bolt"
+                    case .snow:
+                        return "cloud.snow"
+                    case .wind:
+                        return "wind"
+            
+            
+            
+        }
+    }
+}

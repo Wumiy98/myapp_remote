@@ -103,7 +103,7 @@ extension DiaryView{
                     ){//test
                         Rowview(diaryDate: diary.diaryDate,
                                 mood_index:diary.mood_index,
-                                mydate: diary.date)
+                                mydate: diary.date,weather: diary.weather)
                         
 //                        Text("\(diary.mood_index)")
 //                        Text("\(diary.diaryDate)")

@@ -15,6 +15,7 @@ public class Diary: NSManagedObject,Identifiable {
     @NSManaged public var diaryDate: Date
     @NSManaged public var mood_index: Double
     @NSManaged public var mytext: String
+    @NSManaged public var weather: String
 }
 
 

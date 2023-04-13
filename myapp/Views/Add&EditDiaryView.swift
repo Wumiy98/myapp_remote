@@ -20,11 +20,12 @@ struct AddDiaryView: View {
     @State private var mytext = ""
     @State private var diaryDate  = Date()
     @State private var mood_index:Double = 5.0
+    @State private var weather:String = "sun.max"
 
     @State var alertTitle:String = ""
     @State var showAlert :Bool = false
     @State var wordscount:Int = 0
-
+    @State var myWeather: MyWeather = .sunny
 
 
     @State var isedited:Bool
@@ -36,6 +37,7 @@ struct AddDiaryView: View {
                             Form{
                                 Section{
                                     AddTopView(diaryDate: $diaryDate,showtime: $showtime)
+                                    weatherPicker
                                     AddMidView()
                                     AddBottonView()
                                     
@@ -76,8 +78,9 @@ struct AddDiaryView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                             .stroke(Color("myblack"), lineWidth:3)
-                            .frame(width: 360,height: 610)
+                            .frame(width: 360,height: 650)
                             .padding()
+                            .offset(y:10)
 
                         )
   
@@ -99,7 +102,6 @@ extension AddDiaryView{
             Button(action:{self.presentationMode.wrappedValue.dismiss()}){Image(systemName: "chevron.backward")
                     .font(.title)
                 
-//"chevron.backward"
                 
             }
             .padding([.leading, .bottom], 15.0)
@@ -122,6 +124,7 @@ extension AddDiaryView{
                    mytext = diary.mytext
                    diaryDate = diary.diaryDate
                    mood_index = diary.mood_index
+                   weather = diary.weather
                
                }
 }
@@ -132,11 +135,9 @@ extension AddDiaryView{
    }
    private func AddBottonView()-> some View{
        VStack{
-       Text("my mood index: \(Int(mood_index))")
+           MoodweatherBatteryView
            
-           BatteryView(mood_index: $mood_index)
-               .frame(width: 100)
-               .padding()
+
            
            Slider(value: $mood_index.animation(),
               in: 0...10,
@@ -149,8 +150,8 @@ extension AddDiaryView{
            
                Button("Submit"){submiteaction(isedited: isedited)}
                    .buttonStyle(.borderedProminent)
-                   .foregroundColor(Color(UIColor.systemBackground)
-)
+                   .foregroundColor(Color(UIColor.systemBackground))
+                   .tint(Color("myblack"))
                    .padding()
  
 
@@ -162,13 +163,14 @@ extension AddDiaryView{
        return Alert(title: Text(alertTitle))
    }
    private func submiteaction(isedited:Bool) {
+       weather = myWeather.pickWeather
 
        if allAppropriate(){
            if isedited{
                if let diary = self.diary{
-                   PersistenceController().editdiary(diary: diary, mytext: mytext, mood_index: mood_index, diaryDate :diaryDate ,context: managedObejectContext)}
+                   PersistenceController().editdiary(diary: diary, mytext: mytext,mood_index: mood_index, weather:weather, diaryDate :diaryDate ,context: managedObejectContext)}
            }else{
-               PersistenceController().adddiary(mytext: mytext, mood_index: mood_index, diaryDate :diaryDate ,context: managedObejectContext)}
+               PersistenceController().adddiary(mytext: mytext, mood_index: mood_index, diaryDate :diaryDate,weather:weather,context: managedObejectContext)}
            dismiss()
 
 
@@ -227,6 +229,50 @@ extension AddDiaryView{
         }
         
     }//end function
+    
+    
+    var MoodweatherBatteryView:some View{
+        
+        VStack{
+            Text("my mood index: \(Int(mood_index))")
+                .fontWeight(.bold)
+            
+            HStack{
+             
+                Image(systemName: myWeather.pickWeather)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 40)
+                    .padding()
+                BatteryView(mood_index: $mood_index)
+                    .frame(width: 100)
+                .padding()
+            }
+            
+
+            
+            
+        }
+    }
+    
+    var weatherPicker:some View{
+        HStack{
+            Text("Weather")
+                .fontWeight(.bold)
+                .foregroundColor(Color("myblack"))
+            
+            Picker("",selection: $myWeather) {
+                    ForEach(MyWeather.allCases, id: \.self) { filter in
+                        Text(filter.rawValue)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .pickerStyle(.menu)
+        }
+
+        
+    }
+    
 }
 
 
@@ -235,7 +281,7 @@ struct AddTopView: View {
     @Binding var showtime:Bool
     var body: some View {
         HStack{
-            Text("Diary Date")
+            Text("Diary Date ")
                 .fontWeight(.bold)
                 .foregroundColor(Color("myblack"))
             Spacer()

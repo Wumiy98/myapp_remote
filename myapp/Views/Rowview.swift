@@ -15,6 +15,7 @@ struct Rowview: View {
     var diaryDate :Date
     var mood_index: Double
     let mydate:Date
+    let weather:String
     
     
     var body: some View {
@@ -49,11 +50,15 @@ struct Rowview: View {
                 
                 Spacer()
                 
-                Text(calcTimeSince(date:mydate))
-                    .foregroundColor(Color("myblack"))
-                //                        .font(.caption)
-                    .italic()
-                    .padding(.top,-8)
+//                Text(calcTimeSince(date:mydate))
+//                    .foregroundColor(Color("myblack"))
+//                //                        .font(.caption)
+//                    .italic()
+//                    .padding(.top,-8)
+                Image(systemName: weather)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
                 
                 
                 
@@ -191,7 +196,7 @@ struct Static_BatteryView: View {
     
     struct Rowview_Previews: PreviewProvider {
         static var previews: some View {
-            List{ Rowview(diaryDate :Date(), mood_index:5, mydate:Date())
+            List{ Rowview(diaryDate :Date(), mood_index:5, mydate:Date(),weather: "sun.max")
                 .previewLayout(.device)}
 
             }

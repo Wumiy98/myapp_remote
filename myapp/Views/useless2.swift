@@ -8,50 +8,28 @@
 
 import SwiftUI
 
-struct useless2:View {
- 
-//        var calendar = Calendar.current
-    @State var rating:Int = 5
-
-        var body: some View {
-
-            ZStack{
-                batt
-                    .overlay(
-                    
-                        overlay.mask(batt))
-                
-            }
-           
-        }
+struct Useless2: View {
     
+//    @State var myWeather: MyWeather = .sunny
+//    var pickWeather: String
     
-    
-    
-    
-    
-    
-    var batt:some View{
-        Image(systemName:"battery.100")
-            .resizable()
-            .scaledToFit()
-            .font(.headline.weight(.ultraLight))
-            .foregroundColor(.primary)
+    var body: some View {
         
+        Text("dasd")
+
+
+
     }
     
-    var overlay:some View{
-        Rectangle()
-            .foregroundColor(.yellow)
-        
-    }
-    }
+
+}
+
 
  
 
-struct useless2_Previews: PreviewProvider {
+struct Useless2_Previews: PreviewProvider {
     static var previews: some View {
-        useless2()
+        Useless2()
     }
 }
 

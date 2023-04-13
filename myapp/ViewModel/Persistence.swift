@@ -17,9 +17,11 @@ struct PersistenceController {
         //
         for index in 0..<150 {
             let newItem = Diary(context: viewContext)
+            let radomwether = ["sun.max","smoke","cloud.rain"]
             let date = Date()
             newItem.id = UUID()
             newItem.date = date
+            newItem.weather = radomwether.randomElement() ?? ""
             newItem.diaryDate = Calendar.current.date(byAdding: .day, value: -Int(index), to: date) ?? Date()
             newItem.mytext = "Content number\(index)"
             newItem.mood_index = Double(Int.random(in:1...10))
@@ -63,22 +65,24 @@ struct PersistenceController {
     }
     
     
-    func adddiary(mytext: String, mood_index:Double,diaryDate:Date, context:NSManagedObjectContext){
+    func adddiary(mytext: String, mood_index:Double,diaryDate:Date,weather:String, context:NSManagedObjectContext){
         
         let diary = Diary(context: context)
         diary.id = UUID()
         diary.date = Date()
+        diary.weather = weather
         diary.mytext = mytext
         diary.mood_index = mood_index
         diary.diaryDate = diaryDate
         save(context: context)
     }
     
-    func editdiary(diary:Diary, mytext: String,mood_index:Double,diaryDate:Date,context:NSManagedObjectContext){
+    func editdiary(diary:Diary, mytext: String,mood_index:Double,weather:String,diaryDate:Date,context:NSManagedObjectContext){
         diary.date = Date()
         diary.mytext = mytext
         diary.mood_index = mood_index
         diary.diaryDate = diaryDate
+        diary.weather = weather
         
         save(context: context)
         
