@@ -8,58 +8,7 @@
 import SwiftUI
 import CoreData
 
-//struct ContentView: View {
-//    @State var selectedTab :Int
-//
-//    init(selectedTab:Int = 0) {
-//        self.selectedTab = selectedTab//change tabview
-//        let appearance = UITabBarAppearance()
-//        appearance.backgroundColor = .white // Set tab bar background color
-//        appearance.shadowImage = UIImage() // Remove tab bar shadow
-//        appearance.shadowColor = .clear // Set tab bar shadow color
-//        UITabBar.appearance().standardAppearance = appearance // Set standard appearance
-//    }
-//    var body: some View {
-//
-//
-//        //        NavigationView {
-//        TabView(selection: $selectedTab){
-//            Text("Home")
-//                .tabItem{
-//
-//                    Image(systemName: "house.fill")
-//                    Text("Home")
-//                }
-//                .tag(1)
-//
-//            DiaryView()
-//                .tabItem{
-//                    Image(systemName: "book.fill")
-//                    Text("Diary")
-//                }.tag(2)
-//
-//            GraphView()
-//                .tabItem{
-//
-//                    Image(systemName: "chart.xyaxis.line")
-//                    Text("Graph")
-//                }
-//                .tag(3)
-//
-//
-//
-//
-//
-//
-//
-//
-//        }//tabview
-//
-//
-//
-//    }
-//
-//}
+//test
     
 struct ContentView: View {
     @State private var currentSelected:Tab = .home
