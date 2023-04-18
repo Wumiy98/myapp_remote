@@ -34,6 +34,7 @@ struct TabBar: View {
              .padding()
              .background(Color(UIColor.systemBackground))//
              .cornerRadius(10)
+             .background(RoundedRectangle(cornerRadius: 10))
              .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
              .overlay{
                  Image(systemName: "plus")
@@ -47,7 +48,6 @@ struct TabBar: View {
                         showingAddView = true
                     }
              }
-//             .frame(alignment: .bottom)
              .sheet(isPresented:$showingAddView){
                  NavigationView{
                      AddDiaryView(isedited: false)}}
@@ -56,7 +56,7 @@ struct TabBar: View {
 
 
      }
-    
+
 
 
 }//End Viw
@@ -90,7 +90,6 @@ extension TabBar{
             )
 
 
-//                         .frame(maxWidth: .infinity)
         }
         
     }
@@ -129,9 +128,3 @@ enum Tab: CaseIterable{
 
 
 
-//
-//struct TabBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TabBar()
-//    }
-//}

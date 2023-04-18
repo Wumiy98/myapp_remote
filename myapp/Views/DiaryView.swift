@@ -103,10 +103,10 @@ extension DiaryView{
         
         HStack{
             VStack{
-                let calendar = Calendar.current // 获取当前的日历
+                let calendar = Calendar.current //
 
-                let year = Double(calendar.component(.year, from: Date())) // 获取当前的年份
-                let month = Double(calendar.component(.month, from: Date())) // 获取当前的月份
+                let year = Double(calendar.component(.year, from: Date())) //
+                let month = Double(calendar.component(.month, from: Date())) 
                 
                 Slider(value: $pickyear.animation(),
                        in: 2020...year,
@@ -121,11 +121,12 @@ extension DiaryView{
             }
 //                            .tint(Color(UIColor.systemBackground))
             .tint(Color("myblack"))
-            .frame(width: 200)
+            .frame(width: 150)
+            .padding(.horizontal,20)
             
             VStack{
                     Text("Year:\(String(format: "%.0f",pickyear))")
-                    Text("month:\(Int(pickmonth))")
+                    Text("Month:\(Int(pickmonth))")
                     //
                 }
             .foregroundColor(Color(UIColor.systemBackground))

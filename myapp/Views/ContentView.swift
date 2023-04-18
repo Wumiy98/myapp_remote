@@ -8,8 +8,10 @@
 import SwiftUI
 import CoreData
 
-//test
     
+
+    
+
 struct ContentView: View {
     @State private var currentSelected:Tab = .home
     @StateObject var tabBarStore: TabBarStore = TabBarStore()
@@ -18,38 +20,33 @@ struct ContentView: View {
         
 
         
-        VStack{
-
-            switch currentSelected {
-            case .home:
-                HomeView()
-//                DiaryView()
-                
-            case .diary:
-                DiaryView()
-            }
+        ZStack(alignment: .bottom) {
             
-//            TabBar()
-            Spacer()
+            VStack{
+                switch currentSelected {
+                case .home:
+                    HomeView()
+    //                DiaryView()
+                    
+                case .diary:
+                    DiaryView()
+                }
+                
+                Spacer()
+                
+            }//tabview
             if !tabBarStore.isHidden{
                 TabBar(currentSelected:$currentSelected)
                     .transition(.move(edge: .bottom))
 
-//                    .animation(.easeInOut(duration: 0.2))
             }
-            
-            
-        }//tabview
+        }//z
         .ignoresSafeArea(edges:.bottom)
         .environmentObject(tabBarStore)
-
         
     }
         
     }
-    
-
-    
     
 
     
