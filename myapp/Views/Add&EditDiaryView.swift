@@ -75,14 +75,14 @@ struct AddDiaryView: View {
                         }//zstack
                         .navigationBarTitle(isedited ?"Edit your Diary":"Add Your Diary",displayMode:.inline)
                         .alert(isPresented: $showAlert, content: getAlert)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color("myblack"), lineWidth:3)
-                            .frame(width: 360,height: 650)
-                            .padding()
-                            .offset(y:10)
-
-                        )
+//                        .overlay(
+//                            RoundedRectangle(cornerRadius: 8)
+//                            .stroke(Color("myblack"), lineWidth:3)
+//                            .frame(width: 360,height: 650)
+//                            .padding()
+//                            .offset(y:10)
+//
+//                        )
   
 
                     

@@ -3,7 +3,7 @@
 //  myapp
 //
 //  Created by 吴明翔翔翔 on 2023/3/25.
-// 日期搜索，天气
+// 日期搜索
 //chart 动画，模拟器不显示
 
 import SwiftUI
