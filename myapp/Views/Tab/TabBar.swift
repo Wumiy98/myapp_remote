@@ -35,7 +35,6 @@ struct TabBar: View {
              .background(Color(UIColor.systemBackground))//
              .cornerRadius(10)
              .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 4)
-//             .padding(.horizontal)
              .overlay{
                  Image(systemName: "plus")
                      .font(.system(size: 50))
@@ -48,7 +47,7 @@ struct TabBar: View {
                         showingAddView = true
                     }
              }
-             .frame(alignment: .bottom)
+//             .frame(alignment: .bottom)
              .sheet(isPresented:$showingAddView){
                  NavigationView{
                      AddDiaryView(isedited: false)}}

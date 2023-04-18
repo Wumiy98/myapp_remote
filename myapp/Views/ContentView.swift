@@ -34,6 +34,7 @@ struct ContentView: View {
             if !tabBarStore.isHidden{
                 TabBar(currentSelected:$currentSelected)
                     .transition(.move(edge: .bottom))
+
 //                    .animation(.easeInOut(duration: 0.2))
             }
             

@@ -85,7 +85,7 @@ enum MyWeather: String, CaseIterable {
                     case .rain:
                         return  "cloud.rain"
                     case .cloud:
-                        return  "smoke"
+                        return  "cloud.fog"
                     case .thunder:
                         return "cloud.bolt"
                     case .snow:
@@ -98,3 +98,4 @@ enum MyWeather: String, CaseIterable {
         }
     }
 }
+

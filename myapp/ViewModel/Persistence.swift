@@ -17,7 +17,7 @@ struct PersistenceController {
         //
         for index in 0..<150 {
             let newItem = Diary(context: viewContext)
-            let radomwether = ["sun.max","smoke","cloud.rain"]
+            let radomwether = ["sun.max","cloud.fog","cloud.rain"]
             let date = Date()
             newItem.id = UUID()
             newItem.date = date

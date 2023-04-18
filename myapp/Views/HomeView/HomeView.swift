@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var animate :Bool = false
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.diaryDate,order: .reverse)]) var diaries:FetchedResults<Diary>
     var body: some View {
         
         ZStack(alignment: .center){
@@ -30,7 +32,14 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200)
-                Text("  Why Not Generate Your Record ?  ")
+                
+                Text("\(Int(diaries.count)) records now")
+                    .foregroundColor(Color("myblack"))
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(.bottom,-20)
+                
+                Text("  Why Not Start Your New Record ?  ")
                     .foregroundColor(Color(UIColor.systemBackground))
                     .font(.headline)
                     .frame(height:55)

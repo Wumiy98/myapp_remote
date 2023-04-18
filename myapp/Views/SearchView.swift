@@ -170,7 +170,7 @@ struct StaticSearchView: View {
     var body: some View {
         ZStack(alignment:.leading){
             GlassView()
-            Text("Search")
+            Text("Search the Content")
                 .padding(.leading,30)
         }
         .padding(7)
