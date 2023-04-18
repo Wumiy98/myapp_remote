@@ -46,6 +46,7 @@ struct Rowview: View {
 
                     
                 }
+                .padding(.leading,20)
                 
                 
                 Spacer()
@@ -59,6 +60,7 @@ struct Rowview: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 50)
+                    .padding(.trailing,20)
                 
                 
                 

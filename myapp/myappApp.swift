@@ -13,7 +13,6 @@ struct myappApp: App {
     let persistenceController = PersistenceController.shared
     
     
-    
     //core
     var body: some Scene {
         WindowGroup{

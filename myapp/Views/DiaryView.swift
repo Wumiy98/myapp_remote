@@ -15,25 +15,18 @@ struct DiaryView: View {
     @EnvironmentObject var tabBarStore: TabBarStore
     @State var showgraphview:Bool  = false
     @State var diaries: [Diary] = []
-    @State var pickyear:Int = 2023
-    @State var pickmonth:Int = 1
+    @State var pickyear:Double = Double(Calendar.current.component(.year, from: Date()))
+    @State var pickmonth:Double = Double(Calendar.current.component(.month, from: Date()))
+//    @State var pickall:Bool = true
     
     
     //    @FetchReques(entity: Diary.entity(),sortDescriptors:
     //                    [NSSortDescriptor(keyPath:\Diary.diaryDate,ascending: true)]) var diaries:FetchedResults<Diary>
     
     
-//    @State private var showingAddView = false
-//     var searchIsEdited:Bool = false
 
     //MARK: Body
     var body: some View {
-        
-//        let januaryDates = corediaries.filter { (date) -> Bool in
-//            let components = Calendar.current.dateComponents([.month], from: date.diaryDate)
-//            return components.month == 1
-//        }
-
         
         if corediaries.count == 0 {
             NavigationView{ NoItemsView()}
@@ -47,17 +40,23 @@ struct DiaryView: View {
             NavigationView{
 
                 ZStack(alignment: .bottom){
-                    VStack(alignment:.leading){
-//                        Text("you have recorded \(Int(diaries.count)) diaries")
-//                            .foregroundColor(.secondary)
-//                            .padding(.horizontal)
+                    
+              
+                    VStack{
+
+                        
                         
                         NavigationLink(destination: SearchView()) {
-                        StaticSearchView()}
+                        StaticSearchView()
+                        }
+                        
+
+                        myfilter
                         listView
                         
+                        
+                        
                     }
-                    .accentColor(.red)
                     .navigationBarItems(
                         trailing: Button(action: {
                             showgraphview.toggle()
@@ -71,13 +70,17 @@ struct DiaryView: View {
                     .sheet(isPresented: $showgraphview){
                         GraphView()
                     }
+                    
+        
                 }
 
             }//navigation end
             .onAppear(perform: {
-                DateFilter()
-                
+                diaries = Array(corediaries)
+
             })
+            .onChange(of: pickmonth ){_ in DateFilter()}
+            .onChange(of: pickyear ){_ in DateFilter()}
             
             .navigationViewStyle(.stack)//adapt for ipad
 
@@ -94,10 +97,57 @@ struct DiaryView: View {
 
 
 extension DiaryView{
+    
+    
+    private var myfilter:some View{
+        
+        HStack{
+            VStack{
+                let calendar = Calendar.current // 获取当前的日历
+
+                let year = Double(calendar.component(.year, from: Date())) // 获取当前的年份
+                let month = Double(calendar.component(.month, from: Date())) // 获取当前的月份
+                
+                Slider(value: $pickyear.animation(),
+                       in: 2020...year,
+                       step: 1
+                )
+                
+                Slider(value: $pickmonth.animation(),
+                       in: 1...month,
+                       step: 1
+                )
+
+            }
+//                            .tint(Color(UIColor.systemBackground))
+            .tint(Color("myblack"))
+            .frame(width: 200)
+            
+            VStack{
+                    Text("Year:\(String(format: "%.0f",pickyear))")
+                    Text("month:\(Int(pickmonth))")
+                    //
+                }
+            .foregroundColor(Color(UIColor.systemBackground))
+            .fontWeight(.bold)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color("myblack")))
+            .padding(.horizontal,20)
+                
+//            VStack{
+//                Button(action: {}){Text("clear")
+//                }
+//
+//            }
+                
+                
+            }
+        
+    }
     private func DateFilter(){
         diaries = corediaries.filter { (date) -> Bool in
             let components = Calendar.current.dateComponents([.year,.month], from: date.diaryDate)
-             return components.month == pickmonth && components.year == pickyear
+             return components.month == Int(pickmonth) && components.year == Int(pickyear)
          }
         
     }

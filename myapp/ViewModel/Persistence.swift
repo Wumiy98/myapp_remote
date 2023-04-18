@@ -15,7 +15,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         //
-        for index in 0..<150 {
+        for index in 0..<500 {
             let newItem = Diary(context: viewContext)
             let radomwether = ["sun.max","cloud.fog","cloud.rain"]
             let date = Date()
